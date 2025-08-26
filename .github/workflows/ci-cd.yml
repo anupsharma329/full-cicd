@@ -9,6 +9,8 @@ on:
 jobs:
   build-test-push:
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/full-cicd-web:latest
 
     steps:
       - name: Checkout code
@@ -28,13 +30,17 @@ jobs:
         run: |
           echo "No tests yet"  # Replace with pytest/unittest
 
+      # Only login on pushes to main (secrets are not available on PRs from forks)
       - name: Log in to Docker Hub
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: docker.io
 
       - name: Build and push Docker image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/cicd-demo:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/cicd-demo:latest
+          docker build -t "$IMAGE_NAME" .
+          docker push "$IMAGE_NAME"
