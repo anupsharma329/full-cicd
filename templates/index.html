@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CI/CD Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="badge">Flask + Docker + K8s</div>
+        <h1>CI/CD Pipeline Demo</h1>
+        <p class="subtitle">Deployed with Docker Compose and ready for Kubernetes</p>
+      </header>
+
+      <main class="card">
+        <div class="glow"></div>
+        <h2>Hello, Anup! 👋</h2>
+        <p>
+          You're viewing a styled Flask app served with <strong>Gunicorn</strong> in a container. Update the
+          code and rebuild to see changes.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="https://flask.palletsprojects.com/" target="_blank" rel="noreferrer">Flask Docs</a>
+          <a class="button" href="/healthz">Health Check</a>
+        </div>
+      </main>
+
+      <footer class="footer">Built with ❤️ for fast iterations</footer>
+    </div>
+  </body>
+  </html>
+
+
